@@ -48,8 +48,11 @@ RUN docker-php-ext-install \
 	xsl \
 	zip \
 	pdo_mysql \
+	sockets \
 	&& docker-php-ext-configure gd --with-freetype-dir=/usr --with-jpeg-dir=/usr --with-png-dir=/usr \
 	&& docker-php-ext-install -j$(nproc) gd
+
+COPY "./php.ini" "$PHP_INI_DIR/conf.d"
 
 # Install oAuth
 RUN pecl install oauth \
@@ -72,7 +75,7 @@ RUN apt-get install -y nodejs \
 # Install Composer
 RUN	curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer \
 	&& mkdir /var/www/.composer \
-	&& chmod -R 777 /var/www/.composer 
+	&& chmod -R 777 /var/www/.composer
 
 # Install Code Sniffer
 
@@ -86,9 +89,11 @@ RUN wget https://files.magerun.net/n98-magerun2.phar \
 	&& mv ./n98-magerun2.phar /usr/local/bin/
 
 # Permissions
-RUN chsh -s /bin/bash www-data \
-	&& chown -R 1000:www-data /var/www
-RUN mkdir /var/www/magento2
+RUN chmod 777 -Rf /var/www /var/www/.* \
+	&& mkdir /var/www/magento2 \
+	&& chown -Rf www-data:www-data /var/www /var/www/.* \
+	&& usermod -u 1000 www-data \
+	&& chsh -s /bin/bash www-data
 
 EXPOSE 8080
 

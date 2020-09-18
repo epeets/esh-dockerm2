@@ -29,7 +29,7 @@ services:
 
     #PHP-FPM
     php:
-        image: m2php
+        image: m2php73
         container_name: php
         volumes: 
             - ./magento:/var/www/magento2
@@ -46,7 +46,7 @@ services:
         restart: always
         environment: 
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: portfolio
+            MYSQL_DATABASE: allthingslarge
         volumes: 
             - db-data:/var/lib/mysql
         ports:
