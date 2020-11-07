@@ -87,7 +87,7 @@ services:
         container_name: es01
         restart: always
         environment:
-          - discovery.seed_hosts=single-node
+          - discovery.type=single-node
           - bootstrap.memory_lock=true
           - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
         ulimits:
