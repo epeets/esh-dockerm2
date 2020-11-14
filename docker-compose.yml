@@ -46,7 +46,7 @@ services:
         restart: always
         environment: 
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: allthingslarge
+            MYSQL_DATABASE: < database name >
         volumes: 
             - db-data:/var/lib/mysql
         ports:
