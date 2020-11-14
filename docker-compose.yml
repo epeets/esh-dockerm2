@@ -65,6 +65,7 @@ services:
             - PMA_PASSWORD=root
             - PMA_HOST=mysql
             - PMA_PORT=3306
+            - PHP_MAX_INPUT_VARS = 18000
         ports:
             - 8011:80
         networks:
@@ -87,6 +88,7 @@ services:
         container_name: es01
         restart: always
         environment:
+          - node.name=es01
           - discovery.type=single-node
           - bootstrap.memory_lock=true
           - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -95,6 +97,7 @@ services:
             soft: -1
             hard: -1
         volumes:
+          - ./elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
           - data01:/usr/share/elasticsearch/data
         ports:
           - 9200:9200
