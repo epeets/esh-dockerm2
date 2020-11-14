@@ -1,0 +1,11 @@
+thread_pool:
+  search:
+     size: 4
+     queue_size: 500
+  write:
+     size: 4
+     queue_size: 500
+  get:
+     size: 4
+     queue_size: 500
+
