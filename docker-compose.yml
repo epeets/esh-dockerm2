@@ -92,6 +92,7 @@ services:
           - discovery.type=single-node
           - bootstrap.memory_lock=true
           - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+          - http.host=0.0.0.0
         ulimits:
           memlock:
             soft: -1
