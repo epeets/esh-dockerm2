@@ -29,7 +29,7 @@ services:
 
     #PHP-FPM
     php:
-        image: m2php73
+        image: m2docker
         container_name: php
         volumes: 
             - ./magento:/var/www/magento2
@@ -41,12 +41,12 @@ services:
 
     #Maria DB
     mysql:
-        image: mariadb:latest
+        image: mariadb:10.2
         container_name: mysql
         restart: always
         environment: 
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: < database name >
+            MYSQL_DATABASE: m2docker
         volumes: 
             - db-data:/var/lib/mysql
         ports:
@@ -65,7 +65,7 @@ services:
             - PMA_PASSWORD=root
             - PMA_HOST=mysql
             - PMA_PORT=3306
-            - PHP_MAX_INPUT_VARS = 18000
+            - PHP_MAX_INPUT_VARS=18000
         ports:
             - 8011:80
         networks:
